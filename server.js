@@ -25,11 +25,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => db.select('*').from('users').then(data => res.json(data)));
+app.get('/', (req, res) => res.json('it is working'));
 app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)});
 app.post('/register', register.handleRegister(db, bcrypt));
 app.get('/profile/:id', (req, res) => profile.handleProfile(req, res, db));
 app.put('/image', (req, res) => image.handleImage(req, res, db));
 app.post('/imageurl', (req, res) => image.handleImageApi(req, res));
 
-app.listen(3001, () => console.log('Server is running'));
+app.listen(process.env.PORT || 3000, () => console.log('Server is running'));
